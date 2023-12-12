@@ -1,12 +1,7 @@
 #include "Settings.h"
 
-#define OBJECT '@'
-#define WALL '|'
-#define SPAZI_INIZIALI 10
-#define DIMENSIONE_MURO 27
-#define DIMENSIONE_TANA 9
 
-void printCrockDxToSx(int x, int y);
+
 
 int main() {
 
@@ -55,7 +50,7 @@ int main() {
     mvprintw(LINES/2+2,COLS/2-5," \\::::::::|_______/:::::::\\ - \\");
      */
 
-    printCrockDxToSx(COLS/2-6,LINES/2);
+    printCrockDxToSx((COLS/2)-25,LINES/2);
     attroff(COLOR_PAIR(3));
     attron(COLOR_PAIR(1));
 

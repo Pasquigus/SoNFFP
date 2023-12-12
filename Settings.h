@@ -19,8 +19,15 @@
 #include <stdbool.h>
 #include <sys/signal.h>
 
+//Definizione delle Macro
+#define OBJECT '@'
+#define WALL '|'
+#define SPAZI_INIZIALI 10
+#define DIMENSIONE_MURO 27
+#define DIMENSIONE_TANA 9
 #define VITE_INIZIALI 3
 #define TEMPOMANCHE_SEC 60
+
 
 
 //Definizione struttura Tana
@@ -29,6 +36,9 @@ typedef struct{
     int y;
     bool isOccupata;
 }Tana;
+
+void printCrockDxToSx(int x, int y);
+
 
 
 
