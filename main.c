@@ -18,7 +18,7 @@ int main() {
     int bottomBorderHeight = LINES-5;
 
     // Altezza del bordo superiore
-    int upperBorderHeight = 11;
+    int upperBorderHeight = 12;
 
     int startTane = 6;
 

@@ -38,7 +38,7 @@ typedef struct{
 }Tana;
 
 
-
+//Prototipi delle funzioni
 void printCrockDxToSx(int x, int y);
 
 
