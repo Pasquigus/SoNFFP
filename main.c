@@ -136,3 +136,9 @@ char cosaScrivo(int pos){
 
     }
 }
+
+void printCrockDxToSx(int x, int y){
+    mvprintw(y,x" /::::::8\\________________");
+    mvprintw(y+1,COLS/2-5," vvvvvvvv |  @ @ @ @ @ @   \\");
+    mvprintw(yè2,COLS/2-5," \\::::::::|_______/:::::::\\ - \\");
+}
