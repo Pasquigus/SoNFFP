@@ -37,6 +37,8 @@ typedef struct{
     bool isOccupata;
 }Tana;
 
+
+
 void printCrockDxToSx(int x, int y);
 
 
