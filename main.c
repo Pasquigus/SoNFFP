@@ -65,7 +65,7 @@ int main() {
         mvaddch(3, i, WALL);
         refresh();
     }
-    for(int j = 4; j < 7; j++){
+    for(int j = 4; j < 8; j++){
         count = 0;
 
         for(int i = 0; i < COLS; i++){
