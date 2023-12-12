@@ -6,6 +6,7 @@
 #define DIMENSIONE_MURO 27
 #define DIMENSIONE_TANA 9
 
+void printCrockDxToSx(int x, int y);
 
 int main() {
 
@@ -48,9 +49,13 @@ int main() {
 
     attroff(COLOR_PAIR(1));
     attron(COLOR_PAIR(3));
+    /*
     mvprintw(LINES/2,COLS/2-5," /::::::8\\________________");
     mvprintw(LINES/2+1,COLS/2-5," vvvvvvvv |  @ @ @ @ @ @   \\");
     mvprintw(LINES/2+2,COLS/2-5," \\::::::::|_______/:::::::\\ - \\");
+     */
+
+    printCrockDxToSx(COLS/2-3,LINES/2);
     attroff(COLOR_PAIR(3));
     attron(COLOR_PAIR(1));
 
@@ -138,7 +143,7 @@ char cosaScrivo(int pos){
 }
 
 void printCrockDxToSx(int x, int y){
-    mvprintw(y,x" /::::::8\\________________");
-    mvprintw(y+1,COLS/2-5," vvvvvvvv |  @ @ @ @ @ @   \\");
-    mvprintw(yè2,COLS/2-5," \\::::::::|_______/:::::::\\ - \\");
+    mvprintw(y,x," /::::::8\\________________");
+    mvprintw(y+1,x," vvvvvvvv |  @ @ @ @ @ @   \\");
+    mvprintw(y+2,x," \\::::::::|_______/:::::::\\ - \\");
 }
