@@ -55,7 +55,7 @@ int main() {
     mvprintw(LINES/2+2,COLS/2-5," \\::::::::|_______/:::::::\\ - \\");
      */
 
-    printCrockDxToSx(COLS/2-3,LINES/2);
+    printCrockDxToSx(COLS/2-6,LINES/2);
     attroff(COLOR_PAIR(3));
     attron(COLOR_PAIR(1));
 
