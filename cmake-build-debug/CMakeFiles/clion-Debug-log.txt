@@ -1,4 +1,4 @@
 /snap/clion/250/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/250/bin/ninja/linux/x64/ninja -G Ninja -S /media/sf_Ubuntu-SO/LAB_SO/SoNFFP -B /media/sf_Ubuntu-SO/LAB_SO/SoNFFP/cmake-build-debug
--- Configuring done (0.0s)
+-- Configuring done (0.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: /media/sf_Ubuntu-SO/LAB_SO/SoNFFP/cmake-build-debug

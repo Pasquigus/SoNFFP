@@ -55,6 +55,12 @@ build CMakeFiles/SoNFFP.dir/main.c.o: C_COMPILER__SoNFFP_unscanned_Debug /media/
   OBJECT_DIR = CMakeFiles/SoNFFP.dir
   OBJECT_FILE_DIR = CMakeFiles/SoNFFP.dir
 
+build CMakeFiles/SoNFFP.dir/Settings.c.o: C_COMPILER__SoNFFP_unscanned_Debug /media/sf_Ubuntu-SO/LAB_SO/SoNFFP/Settings.c || cmake_object_order_depends_target_SoNFFP
+  DEP_FILE = CMakeFiles/SoNFFP.dir/Settings.c.o.d
+  FLAGS = -g -std=gnu99 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/SoNFFP.dir
+  OBJECT_FILE_DIR = CMakeFiles/SoNFFP.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SoNFFP
@@ -63,7 +69,7 @@ build CMakeFiles/SoNFFP.dir/main.c.o: C_COMPILER__SoNFFP_unscanned_Debug /media/
 #############################################
 # Link the executable SoNFFP
 
-build SoNFFP: C_EXECUTABLE_LINKER__SoNFFP_Debug CMakeFiles/SoNFFP.dir/main.c.o
+build SoNFFP: C_EXECUTABLE_LINKER__SoNFFP_Debug CMakeFiles/SoNFFP.dir/main.c.o CMakeFiles/SoNFFP.dir/Settings.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/SoNFFP.dir
   POST_BUILD = :

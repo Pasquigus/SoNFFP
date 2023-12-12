@@ -1,105 +1,77 @@
+#include "Settings.c"
 #include "Settings.h"
-
-
 
 
 int main() {
 
+    //getchar();     decommentare per debugging
+    srand(time(NULL));
     initscr(); noecho(); curs_set(0); cbreak(); keypad(stdscr, 1); start_color();
     init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     init_pair(3, COLOR_RED, COLOR_BLACK);
 
-    attron(COLOR_PAIR(1));
-
     int x = COLS / 2, y = LINES / 2, c;
+    int input = 'a';
 
-    // Altezza del bordo inferiore
-    int bottomBorderHeight = LINES-5;
-
-    // Altezza del bordo superiore
-    int upperBorderHeight = 12;
-
-    int startTane = 6;
-
-    bool isSpaziIniziali=false,isMuro=false,isTana=false,isSpaziFinali=false;
-
-    // Disegna la finestra con un bordo più spesso nella parte inferiore
-    box(stdscr, ACS_VLINE, ACS_HLINE);
+    bool isSpaziIniziali=false, isMuro=false, isTana=false, isSpaziFinali=false;
 
 
-    for(int i=0;i<3;i++) {
-        for (int j = 0; j < COLS; j++) {
-            mvaddch(bottomBorderHeight-i, j, OBJECT);
-            refresh();
-        }
-    }
-
-    for(int i=0;i<5;i++) {
-        for (int j = 0; j < COLS; j++) {
-            mvaddch(upperBorderHeight-i, j, OBJECT);
-            refresh();
-        }
-    }
+    // Disegna la schermata iniziale
+    clear();
+    attron(COLOR_PAIR(1));
+    mvprintw( 0, 3, " _______   _____    _______   _______     _______     _______   _____         ");
+    mvprintw( 1, 3, "|   ____| |  __ |  |   _   | |   ____|   |   ____|   |   ____| |  __ |        ");
+    mvprintw( 2, 3, "|  |___   | |  | | |  | |  | |  |        |  |        |  |____  | |  | |       ");
+    mvprintw( 3, 3, "|   ___|  |  -- /  |  | |  | |  |  ____  |  |  ____  |   ____| |  -- /        ");
+    mvprintw( 4, 3, "|  |      |  _ |   |  | |  | |  | |_  _| |  | |_  _| |  |      |  _ |         ");
+    mvprintw( 5, 3, "|  |      | | | |  |  |_|  | |  |___||   |  |___||   |  |____  | | | |        ");
+    mvprintw( 6, 3, "|__|      |_|  |_| |_______| |_______|   |_______|   |_______| |_|  |_|       ");
 
     attroff(COLOR_PAIR(1));
     attron(COLOR_PAIR(3));
-    /*
-    mvprintw(LINES/2,COLS/2-5," /::::::8\\________________");
-    mvprintw(LINES/2+1,COLS/2-5," vvvvvvvv |  @ @ @ @ @ @   \\");
-    mvprintw(LINES/2+2,COLS/2-5," \\::::::::|_______/:::::::\\ - \\");
-     */
-
-    printCrockDxToSx((COLS/2)-25,LINES/2);
+    mvprintw(9,3, "BENVENUTO IN FROGGER!");
+    mvprintw(11,3, "PREMI 'q' PER USCIRE, 'a' PER INIZIARE IL GIOCO");
     attroff(COLOR_PAIR(3));
+    refresh();
+
+
+    do{
+        input=getchar();
+    }while(tolower(input)!='q' && tolower(input)!='a');
+    clear();
+
+    // Disegna la finestra con un bordo più spesso nella parte inferiore
     attron(COLOR_PAIR(1));
-
-
-
-
-    int count = 0;
-    int count2= 0;
+    box(stdscr, ACS_VLINE, ACS_HLINE);
     attroff(COLOR_PAIR(1));
-    attron(COLOR_PAIR(2));
-    for(int i = 0; i < COLS; i++){
-        mvaddch(3, i, WALL);
-        refresh();
-    }
-    for(int j = 4; j < 8; j++){
-        count = 0;
 
-        for(int i = 0; i < COLS; i++){
-            if(count < DIMENSIONE_MURO){
-                count++;
-                mvaddch(j, i, WALL);
-                refresh();
+    printTerrenoDiGioco();
+
+    //Movimento croc dx to sx
+
+    while(1){
+
+        for(int i=COLS-34;i>=0;i--){
+            if(i==0){
+                transitionCrockExitDxToSx(LINES/2);
             }else {
-                count++;
-                mvaddch(j, i, ' ');
+                printCrockDxToSx(i, LINES / 2);
+
+                mvaddch(LINES / 2, i + 26, ' ');
+                mvaddch(LINES / 2 + 1, i + 28, ' ');
+                mvaddch(LINES / 2 + 2, i + 31, ' ');
+                usleep(1000000);
                 refresh();
-                if (count == DIMENSIONE_MURO + DIMENSIONE_TANA) {
-                    count = 0;
-                    count2++;
-                }
-                if (count2 == 5) {
-                    for(int f = i; f < i+DIMENSIONE_MURO; f++){
-                        mvaddch(j, f, WALL);
-                        refresh();
-                    }
-                    break;
-                }
             }
         }
-        if(count2==5){
-            count2=0;
-
-            continue;
-        }
-        attroff(COLOR_PAIR(2));
-        attron(COLOR_PAIR(1));
     }
 
 
+
+
+
+/*
     while (1) {
         c = (int)getch();
         mvaddch(y, x, ' ');
@@ -125,20 +97,9 @@ int main() {
         mvaddch(y, x, OBJECT);
         refresh();
     }
+    */
+
+    return 0;
 }
 
-char cosaScrivo(int pos){
-    int tempPos;
-    if (pos<SPAZI_INIZIALI){
-        return ' ';
-    }else{
-        tempPos = pos-SPAZI_INIZIALI;
 
-    }
-}
-
-void printCrockDxToSx(int x, int y){
-    mvprintw(y,x," /::::::8\\________________");
-    mvprintw(y+1,x," vvvvvvvv |  @ @ @ @ @ @   \\");
-    mvprintw(y+2,x," \\::::::::|_______/:::::::\\ - \\");
-}

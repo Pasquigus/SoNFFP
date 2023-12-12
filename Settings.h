@@ -1,5 +1,5 @@
 //
-// Created by neffefigus on 09/12/23.
+// Created by neffefigus on 12/12/23.
 //
 
 #ifndef SONFFP_SETTINGS_H
@@ -18,6 +18,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <sys/signal.h>
+#include <ctype.h>
 
 //Definizione delle Macro
 #define OBJECT '@'
@@ -39,9 +40,27 @@ typedef struct{
 
 
 //Prototipi delle funzioni
+void printMarciapiede();
+void printSponda();
+void printTane();
+
+void printMarciapiede_V2();
+void printSponda_V2();
+void printTane_V2();
+void printTerrenoDiGioco();
+void printTerrainInChild();
+
+char* rimuoviPrimoCarattere(const char* input);
+char* rimuoviPrimiNCaratteri(const char* input, int n);
+
+void transitionCrockExitDxToSx(int y);
+
 void printCrockDxToSx(int x, int y);
 
+void delchar(char *x,int a, int b);
 
+void printString(char array[],int x,int y, int cDA);
 
+int randomNumber(int min, int max);
 
 #endif //SONFFP_SETTINGS_H
