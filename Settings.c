@@ -4,6 +4,213 @@
 
 #include "Settings.h"
 
+void check(int pipein){
+
+    Entita2 rana, aux, croc;
+
+    croc.x=-1;
+    rana.x=-1;
+
+
+
+    do{
+
+        read(pipein, &aux, sizeof(Entita2));
+
+        if(aux.tipo == CROC){
+
+            if(croc.x>=0 /*COLS-34*/){
+
+                /*
+                mvaddch(LINES / 2, croc.x + 26, ' ');
+                mvaddch(LINES / 2 + 1, croc.x + 28, ' ');
+                mvaddch(LINES / 2 + 2, croc.x + 31, ' ');  */
+                mvaddch(croc.y, croc.x, ' ');
+            }
+
+            croc = aux;
+            //printCrockDxToSx(aux.x, aux.y);
+
+        }
+        else if(aux.tipo == RANA){
+            printTerrenoDiGioco();
+            if(rana.x>=0)
+
+            {
+
+                mvaddch(rana.y, rana.x, ' ');
+
+            }
+
+            rana=aux;
+
+
+        }
+        mvaddch(aux.y, aux.x, aux.r);
+        refresh();
+
+        if (rana.exit==1){  //Esci dalla partita
+            break;
+        }
+
+
+
+
+
+    }while(1);  //cambiare la condizione del while con la condizione di endgame()
+
+    endwin();
+
+}
+
+void moveRana(int pipeout){
+    Entita2 rana;
+    rana.tipo = RANA;
+    rana.x = COLS/2;
+    rana.y = LINES-2;
+    rana.exit = 0;
+    rana.r = 'R';
+
+    int c;
+
+    write(pipeout, &rana, sizeof(Entita2));
+
+    while(1){
+
+        c = (int)getch();
+
+        switch(c)
+
+        {
+
+            case KEY_UP:
+                if(rana.y > 1){
+                    rana.y -= 1;
+                }
+
+                break;
+
+            case KEY_DOWN:
+                if(rana.y < LINES - 2){
+                    rana.y += 1;
+                }
+
+                break;
+
+            case KEY_LEFT:
+                if(rana.x > 1) {
+                    rana.x -= 1;
+                }
+
+                break;
+
+            case KEY_RIGHT:
+                if(rana.x < COLS - 2) {
+                    rana.x += 1;
+                }
+
+                break;
+
+            case 'q':
+                rana.exit = 1;
+
+        }
+
+
+
+        write(pipeout, &rana, sizeof(Entita2));
+
+    }
+
+
+
+
+
+
+}
+
+void moveCrocDXtoSX(int pipeout){
+
+
+    Entita2 croc;
+    croc.r = 'C';
+    croc.x = COLS; //-34;
+    croc.y = LINES/2;
+    croc.tipo = CROC;
+    croc.exit = 0;
+
+    write(pipeout, &croc, sizeof(Entita2));
+
+    //Movimento croc dx to sx
+
+    while (1) {
+
+        for (int i = croc.x; i >= 0; i--) {
+            if (i == 0) {
+                //transitionCrockExitDxToSx(croc.y);
+                croc.x = COLS;
+            } else {
+                //printCrockDxToSx(i, croc.y);
+                croc.x = i;
+                write(pipeout, &croc, sizeof(Entita2));
+                usleep(100000);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+}
+
+void moveCrocSXtoDX(int pipeout){
+    Entita2 croc;
+    croc.r = 'C';
+    croc.x = 0; //34;
+    croc.y = LINES/2+7;
+    croc.tipo = CROC;
+    croc.exit = 0;
+
+    write(pipeout, &croc, sizeof(Entita2));
+
+    //Movimento croc dx to sx
+
+    while (1) {
+
+        for (int i = croc.x; i < COLS; i++) {
+            if (i == COLS-1) {
+                //transitionCrockExitDxToSx(croc.y);
+                croc.x = 0;
+            } else {
+                //printCrockDxToSx(i, croc.y);
+                croc.x = i;
+                write(pipeout, &croc, sizeof(Entita2));
+                usleep(100000);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+}
+
+
+
+void printBox(){
+    attron(COLOR_PAIR(1));
+    box(stdscr, ACS_VLINE, ACS_HLINE);
+    attroff(COLOR_PAIR(1));
+}
+
 void printMarciapiede(){
     attron(COLOR_PAIR(1));
     // Altezza del bordo inferiore
@@ -162,16 +369,13 @@ char* rimuoviPrimiNCaratteri(const char* input, int n) {
 }
 
 void printTerrenoDiGioco(){
+    printBox();
     printMarciapiede();
     printSponda();
     printTane();
 }
 
-void printTerrainInChild() {
-    clear();
-    printTerrenoDiGioco();
-    refresh();
-}
+
 
 void delchar(char *x,int a, int b){
     if ((a+b-1) <= strlen(x)){

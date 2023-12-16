@@ -1,4 +1,4 @@
-# Install script for directory: /media/sf_Ubuntu-SO/LAB_SO/SoNFFP
+# Install script for directory: /home/pasqui/Scrivania/REPOprogetto
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/media/sf_Ubuntu-SO/LAB_SO/SoNFFP/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pasqui/Scrivania/REPOprogetto/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -19,6 +19,7 @@
 #include <stdbool.h>
 #include <sys/signal.h>
 #include <ctype.h>
+#include <semaphore.h>
 
 //Definizione delle Macro
 #define OBJECT '@'
@@ -31,24 +32,44 @@
 
 
 
-//Definizione struttura Tana
+typedef enum {RANA, CROC, PIANTA}Tipo;
+//Definizione strutture
 typedef struct{
     int x;
     int y;
     bool isOccupata;
 }Tana;
 
+typedef struct{
+    Tipo tipo;
+    int x;
+    int y;
+    int exit;
+}Entita;
+
+typedef struct{
+    char r;
+    Tipo tipo;
+    int x;
+    int y;
+    int exit;
+}Entita2;
+
 
 //Prototipi delle funzioni
 void printMarciapiede();
 void printSponda();
 void printTane();
-
+void printBox();
 void printMarciapiede_V2();
 void printSponda_V2();
 void printTane_V2();
 void printTerrenoDiGioco();
 void printTerrainInChild();
+void check(int pipein);
+void moveRana(int pipeout);
+void moveCrocDXtoSX(int pipeout);
+void moveCrocSXtoDX(int pipeout);
 
 char* rimuoviPrimoCarattere(const char* input);
 char* rimuoviPrimiNCaratteri(const char* input, int n);
